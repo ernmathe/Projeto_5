@@ -2,13 +2,21 @@ import pandas as pd
 import streamlit as st
 import plotly_express as px
 
-st.header = ('Tabela dos Dados')
-
 car_data = pd.read_csv('vehicles_us.csv')
 
-st.header = ('Gráfico Histograma')
+# exibi titulo
+st.header('Relatório da Análise de anuncios de venda de carro')
 
-hist_button = st.button('Criar histograma')  # criar um botão
+# titulo tabela de dados
+st.header('Tabela dos Dados')
+
+# exibi dataFrame
+st.dataframe(car_data, use_container_width=True)
+
+# exibi titulo
+st.header('Análise em  Histograma')
+
+hist_button = st.button('Criar Gráfico de Histograma')  # criar um botão
 
 if hist_button:  # se o botão for clicado
     # escrever uma mensagem
@@ -21,8 +29,18 @@ if hist_button:  # se o botão for clicado
     # exibir um gráfico Plotly interativo
     st.plotly_chart(fig, use_container_width=True)
 
-st.header = ('Gráfico de dispersão')
+st.header('Análise de dispersão')
 
 # criar um gráfico de dispersão
-fig = px.scatter(car_data, x="odometer", y="price")
-fig.show()
+
+disp_button = st.button('Criar Gráfico de dispersão')   # cria um botão
+
+if disp_button:    # se o botão for cliclado
+    # escreva a mensagem
+    st.write(
+        'Criando um gráfico de dispersão para o conjunto de dados de anúncios de vendas de carros')
+
+    # cria um  gráfico de dispersão
+    fig_desp = px.scatter(car_data, x="odometer", y="price")
+
+    st.plotly_chart(fig_desp, use_container_width=True)
